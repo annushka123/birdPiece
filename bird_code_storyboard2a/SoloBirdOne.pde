@@ -15,8 +15,6 @@ float posz;
 float accelx;
 float accely;
 float accelz;
-float px;
-float py;
 
 int sliderPot;
 int fsrSense;
@@ -30,17 +28,10 @@ float red;
 float green;
 float blue;
 
-float pxS;
-float pyS;
-
 void setup() {
   size(400, 400);
-    
-    px = map(accelx, -0.24, 1.43, 0.01, 0.15);
-    py = map(accely, -0.95, -1.0, 0.02, 0.3);
-    pxS = map(accelx, -0.9, 0.57, 0.01, 0.15);
-    pyS = map(accely, -0.95, 0.48, 0.01, 0.1);
-  bird = new SoloBird(pxS, pyS); 
+
+  bird = new SoloBird(); 
   println("bird", posx*-1);
   lines = new FlowingLines();
 
@@ -70,10 +61,12 @@ void draw() {
   OscMessage message = new OscMessage("/wings");
   message.add(mouseY);
   soloBirdOSC.send(message, myRemoteBirdLocation);
+  
+      float px = map(accelx, -0.24, 1.43, 0.01, 0.15);
+    float py = map(accely, -0.95, -1.0, 2, 5);
 
 
-
-  bird.update(200, 300);
+  bird.update(200, 300, px, py);
   bird.checkEdges();
   bird.display();
   

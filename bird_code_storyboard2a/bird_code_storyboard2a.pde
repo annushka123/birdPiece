@@ -39,7 +39,7 @@ class SoloBird {
   float b;
 
 
-  SoloBird(float temp_px, float temp_py) {
+  SoloBird() {
 
     location = new PVector(width/2, height/2);
     velocity = new PVector(0, 0);
@@ -47,11 +47,11 @@ class SoloBird {
     wingaccel = new PVector(0,5);
     wingSpan = new PVector(0, 0);
         //acceleration
-    bowaccel = new PVector(temp_px,temp_py);
+    bowaccel = new PVector(0,0);
 
   }
 
-  void update(float targetX, float targetY) {
+  void update(float targetX, float targetY, float temp_px, float temp_py) {
  
 
     target = new PVector(targetX, targetY);
@@ -76,39 +76,8 @@ class SoloBird {
     }
 
 
-    ////need to rewrite this
-    //PVector pmouse = new PVector(pmouseX, pmouseY);
 
-    ////PVector mouse = new PVector(accelx*0.3, accelx*0.2);
-    //PVector mouse = new PVector(mouseX, mouseY);
-    //mouse.sub(pmouse);
-
-    //mouse.mult(accelx);
-    
-    
-
-    
-
-
-    float psx = map(posx, -32, 32, -0.7, 0.7);
-    float psy = map(posy, -32, 32, -0.7, 0.7);
-
-    //location
-    bow = new PVector(psx, psy);
-
-    //wingaccel.add(bowaccel);
-
-    //bowaccel = new PVector(temp_px, temp_py);
-    //wingaccel = PVector.random2D();
-    //wingaccel.add(bowaccel);
-    
-
-    wingSpan.add(bowaccel);
-    println("wingSpan: ", wingSpan);
-    //println(px);
-    //wingaccel.limit(1);
-    //
-
+    rightY = rightY + speedX;
 
     // Get a random element from an array
     //String[] words = { "apple", "bear", "cat", "dog" };
@@ -165,13 +134,8 @@ class SoloBird {
   }
 
   void checkEdges() {
-    if (wingSpan.x > 1.00 ||wingSpan.x <-15.00) {
-      bowaccel.mult( -1);
-      
-    }
-        if (wingSpan.y > 1. || wingSpan.y < -15.00) {
-      bowaccel.mult( -1);
-      
+    if (rightY > 1.00 || rightY < -15.00) {
+      speedX = speedX * -1;
     }
   }
 }

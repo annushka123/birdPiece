@@ -47,7 +47,7 @@ float pxLS;
  
 float d;
 float zero;
-float nums;
+float nums=0;
 
 void setup() {
   size(400, 400);
@@ -66,7 +66,7 @@ void setup() {
   //upper_zero = zero + paccelx/2;
   //lower_zero = zero - paccelx/2;
    
-   if(nums<0.3){
+   if(nums>0){
          //px = map(accelx, -0.35, 1.43, 0.01, 0.9);
          //py = map(accely, -1.24, -0.33, 0.05, 2.8);
 
@@ -77,25 +77,8 @@ void setup() {
   py = map(accely, -0.95, 0.48, 0.01, 0.4);
    }
 
-//   else if(nums>1.) {
-     
-//     println("fast");
-//           px = map(accelx, -0.35, 1.43, 0.01, 0.9);
-//         py = map(accely, -1.24, -0.33, 0.05, 2.8);
 
-//         println("fast");
-////     pxFS = px;
-////    pyFS = py;
-
-       
-//  //px = map(accelx, -0.9, 1.15, 0.01, 0.2);
-//  //py = map(accely, -0.95, 0.48, 0.01, 0.4);
-  
-  
-//   }
-
-
-  bird = new SoloBird(px, py);
+  bird = new SoloBird();
   lines = new FlowingLines();
 
   oscP5 = new OscP5(this, 6001);
@@ -120,22 +103,7 @@ void draw() {
 
   background(0);
 
-    
-     accelxList.add(accelx);
-   
-  for(int i = 1; i<accelxList.size(); i++) {
-    
 
-    paccelx=accelxList.get(i-1);
-   
-    d=accelxList.get(i)-paccelx;
-    if(d!=0.0) {
-    zero=abs(d);
-    
-    nums = zero+zero;
-    println(zero, nums);
-  }
-  }
 
  
 

@@ -113,7 +113,7 @@ class SoloBird {
         float rlwing_y = pos.y - 15;
         float rwing_x = pos.x - 45;
 
-        float rlwing_3 = pos.y + wingSpan.y;
+        float rlwing_3 = pos.y + rightY;
         float lwing_x = pos.x + 45;
 
         stroke(255);

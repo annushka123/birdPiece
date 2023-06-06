@@ -39,7 +39,7 @@ class SoloBird {
   float b;
 
 
-  SoloBird(float temp_px, float temp_py) {
+  SoloBird() {
 
     location = new PVector(width/2, height/2);
     velocity = new PVector(0, 0);
@@ -47,7 +47,7 @@ class SoloBird {
     wingaccel = new PVector(0,0);
     wingSpan = new PVector(0, 0);
         //acceleration
-    bowaccel = new PVector(temp_px,temp_py);
+    //bowaccel = new PVector(temp_px,temp_py);
 
   }
 
@@ -74,9 +74,60 @@ class SoloBird {
     if (history.size() > 5) {
       history.remove(0);
     }
+    
+        
+     accelxList.add(accelx);
+   
+  for(int i = 1; i<accelxList.size(); i++) {
+    
 
+    paccelx=accelxList.get(i-1);
+   
+    d=accelxList.get(i)-paccelx;
+    if(d!=0.0) {
+    zero=abs(d);
 
-    wingSpan.add(bowaccel);
+  }
+  }
+      nums=zero+zero;
+    
+    println(nums);
+    
+    
+    
+//   else if(nums>1.) {
+     
+//     println("fast");
+//           px = map(accelx, -0.35, 1.43, 0.01, 0.9);
+//         py = map(accely, -1.24, -0.33, 0.05, 2.8);
+
+//         println("fast");
+////     pxFS = px;
+////    pyFS = py;
+
+ if(nums<1.){   
+   
+  px = map(accelx, -0.9, 1.15, 0.01, 0.2);
+  py = map(accely, -0.95, 0.48, 0.01, 0.4);
+  
+  println("slow");
+   } else if(nums>1.) {
+     
+     
+                px = map(accelx, -0.35, 1.43, 0.01, 0.9);
+         py = map(accely, -1.24, -0.33, 0.05, 2.8);
+     
+   }
+
+    
+    
+    
+    
+    
+    
+    rightY = rightY + speedX*py;
+
+    //wingSpan.add(bowaccel);
     //println("wingSpan: ", wingSpan);
     //println(px);
     //wingaccel.limit(1);
@@ -117,7 +168,7 @@ class SoloBird {
         float rlwing_y = pos.y - 15;
         float rwing_x = pos.x - 45;
 
-        float rlwing_3 = pos.y + wingSpan.y;
+        float rlwing_3 = pos.y + rightY;
         float lwing_x = pos.x + 45;
 
         stroke(255);
@@ -138,13 +189,8 @@ class SoloBird {
   }
 
   void checkEdges() {
-    if (wingSpan.x > 1.00 ||wingSpan.x <-15.00) {
-      bowaccel.mult( -1);
-      
-    }
-        if (wingSpan.y > 1. || wingSpan.y < -15.00) {
-      bowaccel.mult( -1);
-      
+    if (rightY > 1.00 || rightY < -15.00) {
+      speedX = speedX * -1;
     }
   }
 }

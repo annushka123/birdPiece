@@ -20,8 +20,8 @@ class SoloBird {
   PVector bow;
 
   float app;
-  float topspeed= 2;
-  float easing = 0.01;
+  float topspeed= 5;
+  float easing = 0.02;
   float paccelx;
 
   //posx is location
@@ -51,10 +51,29 @@ class SoloBird {
 
   }
 
-  void update(float targetX, float targetY) {
+  void update() {
  
 
-    target = new PVector(targetX, targetY);
+    //target = new PVector(targetX, targetY);
+    
+   float birdFlightx = map(posx, -9, 30, 5, width-85);
+   float birdFlighty = map(posy, 11, -31, -10, height);
+    
+   float[] x = {birdFlightx}; 
+   float[] y = {birdFlighty};
+   
+//if(app<50) {
+   for(int i = 0; i < x.length; i++) {
+     for(int j = 0; j < y.length; j++) {
+randLocs = new PVector(x[i], y[j]);
+     }
+   }
+//}   
+
+    target = new PVector(randLocs.x, randLocs.y);
+    
+    
+    //println("randLocs: ", randLocs.x, randLocs.y);
 
 
     //println("randLocs: ", randLocs.x, randLocs.y);
@@ -71,7 +90,7 @@ class SoloBird {
     v = new PVector(location.x, location.y);
     history.add(v);
     //int numPoints = int(map(accely, -0.5, 0.8, 2, 10));
-    if (history.size() > 5) {
+    if (history.size() > 8) {
       history.remove(0);
     }
     
@@ -105,16 +124,16 @@ class SoloBird {
 ////     pxFS = px;
 ////    pyFS = py;
 
- if(nums<1.){   
+ if(nums<0.8){   
    
-  px = map(accelx, -0.9, 1.15, 0.01, 0.2);
+  px = map(accelx, -0.9, 1.15, 0.01, 0.4);
   py = map(accely, -0.95, 0.48, 0.01, 0.4);
   
   println("slow");
-   } else if(nums>1.) {
+   } else if(nums>0.8) {
      
      
-         px = map(accelx, -0.35, 1.48, 0.1, 2.2);
+         px = map(accelx, -0.35, 1.48, 0.5, 2.2);
          py = map(accely, -1.24, -0.33, 0.5, 2.2);
      
    }

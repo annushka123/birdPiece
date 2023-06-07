@@ -50,7 +50,7 @@ float zero;
 float nums=0;
 
 void setup() {
-  size(400, 400);
+  size(800, 800);
 
 
   //  if(zero>-0.8 && zero<0.4) {
@@ -129,7 +129,7 @@ void draw() {
 
 
 
-  bird.update(200, 300);
+  bird.update();
   bird.checkEdges();
   bird.display();
 
